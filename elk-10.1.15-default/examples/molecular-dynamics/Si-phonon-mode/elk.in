@@ -1,0 +1,49 @@
+
+! Molecular dynamics run of the optical phonon mode in Si. The initial
+! conditions are determined by the displacement of the atoms away from
+! equilibrium, with the atomic velocities set to zero.
+
+! Atomic displacements are written to the file ATDISPL_TD.OUT and
+! ATDISPC_TD.OUT in lattice and Cartesian coordinates, respectively.
+
+! Forces as a function of time are written to the file FORCETOT_TD.OUT. These
+! forces may be used in a subsequent TDDFT Ehrenfest calculation with task=462,
+! and will produce a back-reaction on the electronic system.
+
+! The file crystal.axsf is written during the run and can be used to produce an
+! animation of the atomic motion using XCrySDen.
+
+tasks
+  420
+
+! time step in atomic units
+dtimes
+  1.0
+
+! total simulation time
+tstime
+  20000.0
+
+! calculate the forces every 100 time steps
+ntsforce
+  100
+
+avec
+  5.13  5.13  0.00
+  5.13  0.00  5.13
+  0.00  5.13  5.13
+
+sppath
+  '../../../species/'
+
+! atoms are displaced along the diagonal
+atoms
+  1                                 : nspecies
+  'Si.in'                           : spfname
+  2                                 : natoms; atposl below
+  0.0  0.0  0.0
+  0.23 0.23 0.23
+
+ngridk
+  4  4  4
+
