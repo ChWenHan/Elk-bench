@@ -1,0 +1,66 @@
+
+! Copyright (C) 2007 J. K. Dewhurst, S. Sharma and C. Ambrosch-Draxl.
+! This file is distributed under the terms of the GNU General Public License.
+! See the file COPYING for license details.
+
+subroutine projsbf
+use modmain
+implicit none
+! local variables
+integer idm,is,ias,np
+real(8) t1
+! allocatable arrays
+real(8), allocatable :: rfmt(:,:),rfir(:)
+real(8), allocatable :: grfmt(:,:,:),grfir(:,:)
+complex(8), allocatable :: zrhomt(:,:),zrhoir(:)
+complex(8), allocatable :: zvclmt(:,:),zvclir(:)
+allocate(rfmt(npmtmax,natmtot),rfir(ngtot))
+allocate(grfmt(npmtmax,natmtot,3),grfir(ngtot,3))
+allocate(zrhomt(npmtmax,natmtot),zrhoir(ngtot))
+allocate(zvclmt(npmtmax,natmtot),zvclir(ngtot))
+! compute the divergence of B_xc
+rfmt(1:npmtmax,1:natmtot)=0.d0
+rfir(1:ngtot)=0.d0
+do idm=1,3
+  call gradrf(bxcmt(:,:,idm),bxcir(:,idm),grfmt,grfir)
+  do ias=1,natmtot
+    is=idxis(ias)
+    np=npmt(is)
+    rfmt(1:np,ias)=rfmt(1:np,ias)+grfmt(1:np,ias,idm)
+  end do
+  rfir(1:ngtot)=rfir(1:ngtot)+grfir(1:ngtot,idm)
+end do
+! convert real muffin-tin divergence to complex spherical harmonic expansion
+do ias=1,natmtot
+  is=idxis(ias)
+  call rtozfmt(nrmt(is),nrmti(is),rfmt(:,ias),zrhomt(:,ias))
+end do
+! store real interstitial divergence in a complex array
+zrhoir(1:ngtot)=rfir(1:ngtot)
+! solve the complex Poisson's equation
+call genzvclmt(nrmt,nrmti,nrmtmax,rlmt,wprmt,npmtmax,zrhomt,zvclmt)
+call zpotcoul(0,nrmt,nrmti,npmt,nrmtmax,rlmt,ngridg,igfft,ngvec,gc,gclg,ngvec, &
+ jlgrmt,ylmg,sfacg,zrhoir,npmtmax,zvclmt,zvclir)
+! convert complex muffin-tin potential to real spherical harmonic expansion
+do ias=1,natmtot
+  is=idxis(ias)
+  call ztorfmt(nrmt(is),nrmti(is),zvclmt(:,ias),rfmt(:,ias))
+end do
+! store complex interstitial potential in real array
+rfir(1:ngtot)=dble(zvclir(1:ngtot))
+! compute the gradient
+call gradrf(rfmt,rfir,grfmt,grfir)
+! add gradient over 4π to existing B_xc
+t1=1.d0/fourpi
+do idm=1,3
+  do ias=1,natmtot
+    is=idxis(ias)
+    np=npmt(is)
+    bxcmt(1:np,ias,idm)=bxcmt(1:np,ias,idm)+t1*grfmt(1:np,ias,idm)
+  end do
+end do
+bxcir(1:ngtot,1:3)=bxcir(1:ngtot,1:3)+t1*grfir(1:ngtot,1:3)
+deallocate(rfmt,rfir,grfmt,grfir)
+deallocate(zrhomt,zrhoir,zvclmt,zvclir)
+end subroutine
+

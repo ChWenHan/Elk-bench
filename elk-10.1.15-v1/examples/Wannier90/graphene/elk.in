@@ -1,0 +1,57 @@
+
+! Wannier90 graphene example.
+
+! Thanks to Jyoti Krishna.
+
+tasks
+  0
+  550
+
+! large number of empty states required
+nempty
+  20
+
+rgkmax
+  8.0
+
+! relatively coarse k-point grid improves Wannier90 convergence
+ngridk
+  10 10 1
+
+plot1d
+  4  400
+  0.0	         0.0	       0.0 
+  0.3333333333   0.6666666667  0.0
+  0.0            0.5           0.0
+  0.0	         0.0           0.0
+
+avec
+ -0.5   0.866025403784   0.0
+ -1.0   0.0              0.0
+  0.0   0.0              3.2265697
+
+scale
+  4.64890
+
+xlwin
+bands_plot = true
+kpath = true
+kpath_task = bands
+kpath_num_points = 500
+begin kpoint_path
+   G  0.0  0.0  0.0                     K  0.333333   0.666666   0.0
+   K  0.333333   0.666666   0.0         M  0.0   0.5   0.0
+   M  0.0   0.5   0.0                   G  0.0   0.0  0.0
+end kpoint_path
+
+sppath
+ '../../../species/'
+
+atoms
+  1                                     : nspecies
+  'C.in'                                : spfname
+  2                                     : natoms; atposl below
+  0.0  0.0  0.0
+  0.333333333333   0.333333333333   0.0
+
+

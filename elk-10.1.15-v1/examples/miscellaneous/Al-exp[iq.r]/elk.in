@@ -1,0 +1,47 @@
+
+! Computes < i,k+q | exp(iq.r) | j,k > matrix elements. The q-vector is
+! stored in vecql and the outputted k-points are selected with kstlist.
+! Note that q should be chosen commensurate with the k-point grid.
+
+tasks
+  0
+  130
+
+! write out useful variables to VARIABLES.OUT
+wrtvars
+ .true.
+
+! high-quality calculation
+highq
+ .true.
+
+! q-vector
+vecql
+  0.0  0.0  0.125
+
+! list of k-points
+kstlist
+  1
+  2
+  3
+
+avec
+  1.0  1.0  0.0
+  1.0  0.0  1.0
+  0.0  1.0  1.0
+
+scale
+  3.8267
+
+! this is the relative path to the species files
+sppath
+  '../../../species/'
+
+atoms
+  1                                   : nspecies
+  'Al.in'                             : spfname
+  1                                   : natoms; atposl below
+  0.0  0.0  0.0
+
+ngridk
+  8  8  8

@@ -1,0 +1,36 @@
+
+R-point (Cartesian coordinates) :
+   0.000000000       0.000000000       0.000000000    
+Moments :
+ interstitial                :  -0.3768939171E-07  -7.334213321      0.3121058529E-07
+ muffin-tins
+  species :    1 (Fe)
+   atom    1                 :  -0.2060852217E-07  -3.162930507      0.5679888147E-08
+ total moment                :  -0.5829791388E-07  -10.49714383      0.3689047344E-07
+
+R-point (Cartesian coordinates) :
+   94.98709637       94.98709637       94.98709637    
+Moments :
+ interstitial                :   0.1656895028E-07  -7.334213322      0.4887597067E-07
+ muffin-tins
+  species :    1 (Fe)
+   atom    1                 :  -0.2705684499E-07  -3.162930517      0.3431563064E-08
+ total moment                :  -0.1048789471E-07  -10.49714384      0.5230753374E-07
+
+R-point (Cartesian coordinates) :
+   189.9741927       189.9741927       189.9741927    
+Moments :
+ interstitial                :   0.2831471307E-07  -7.334213215      0.1471149449E-06
+ muffin-tins
+  species :    1 (Fe)
+   atom    1                 :  -0.2169438451E-07  -3.162930513      0.2879335468E-08
+ total moment                :   0.6620328556E-08  -10.49714373      0.1499942804E-06
+
+R-point (Cartesian coordinates) :
+   284.9612891       284.9612891       284.9612891    
+Moments :
+ interstitial                :  -0.4069356151E-07  -7.334213296     -0.3731690815E-07
+ muffin-tins
+  species :    1 (Fe)
+   atom    1                 :  -0.2593920872E-07  -3.162930504     -0.5192114703E-08
+ total moment                :  -0.6663277022E-07  -10.49714380     -0.4250902285E-07

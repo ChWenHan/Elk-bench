@@ -1,0 +1,77 @@
+
+! High-harmonic generation in GaAs using real-time TDDFT.
+
+! Plot the Fourier transform of the total current JTOTW.OUT to observe the
+! high-harmonic resonant peaks.
+
+tasks
+  0
+  450
+  460
+  480
+
+wrtdsk
+ .false.
+
+! laser pulse parameters
+!  1 - 3 : polarisation vector (including amplitude)
+!  4     : frequency
+!  5     : phase in degrees
+!  6     : chirp rate
+!  7     : peak time
+!  8     : full-width at half-maximum
+!  9-12  : spin matrices s0,sx,sy,sz
+pulse
+  1      : number of laser pulses
+  1.0 0.0 0.0   0.02 0.0 0.0   2000.0 2000.0
+
+tstime
+  4000.0
+
+dtimes
+  0.1
+
+tshift
+ .false.
+
+highq
+ .true.
+
+nempty
+  32
+
+! scissor correction of Δ=1.243 eV (see Phys. Rev. B 80, 155205 (2009))
+scissor
+  0.0457
+
+swidth
+  0.001
+
+ngridk
+  12 12 12
+
+wplot
+  10000  100  0  : nwplot, ngrkf, nswplot
+  0.0  0.5     : wplot
+
+! use GGA
+xctype
+  20
+
+avec
+  5.3435  5.3435  0.0000
+  5.3435  0.0000  5.3435
+  0.0000  5.3435  5.3435
+
+sppath
+  '../../../species/'
+
+atoms
+  2                                   : nspecies
+  'Ga.in'                             : spfname
+  1                                   : natoms; atposl below
+  0.0   0.0   0.0
+  'As.in'
+  1
+  0.25  0.25  0.25
+
