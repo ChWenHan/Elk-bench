@@ -1,0 +1,55 @@
+
+! Molecular dynamics example of a NaCl monomer in a large box. The code reads in
+! the atomic displacements and velocities in Cartesian coordinates from the file
+! ATDVC.OUT. This file is updated during the molecular dynamics run.
+
+! The file crystal.axsf is written during the run and can be used to produce an
+! animation of the atomic motion using XCrySDen.
+
+tasks
+  420
+
+! read the initial displacements and velocities from ATDVC.OUT
+trdatdv
+ .true.
+
+! time step in atomic units
+dtimes
+  10.0
+
+! total simulation time
+tstime
+  200000.0
+
+! calculate the forces every 100 time steps
+ntsforce
+  100
+
+rgkmax
+  6.0
+
+! small k-point grid required to stabilise calculations
+ngridk
+  2  2  2
+
+sppath
+  '../../../species/'
+
+! atomic positions are in Cartesian coordinates
+molecule
+ .true.
+
+avec
+   14.00000000       0.000000000       0.000000000    
+   0.000000000       14.00000000       0.000000000    
+   0.000000000       0.000000000       14.00000000    
+ 
+atoms
+   2                                    : nspecies
+'Na.in'                                 : spfname
+   1                                    : natoms; atpos, bfcmt below
+    0.00000000    0.00000000    0.00000000    0.00000000  0.00000000  0.00000000
+'Cl.in'                                 : spfname
+   1                                    : natoms; atpos, bfcmt below
+    4.99885462    0.00000000    0.00000000    0.00000000  0.00000000  0.00000000
+

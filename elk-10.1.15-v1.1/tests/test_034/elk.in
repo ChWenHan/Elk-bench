@@ -1,0 +1,48 @@
+
+! Test of the magnetoelectric tensor for BaTiO3.
+
+tasks
+  0
+  390
+  500
+
+test
+ .true.
+
+spinorb
+ .true.
+
+lowq
+ .true.
+
+nkspolar
+  2
+
+stable
+ .true.
+
+ngridk
+  2  2  2
+
+avec
+  7.576  0.0    0.0
+  0.0    7.576  0.0
+  0.0    0.0    7.576
+
+sppath
+  '../../species/'
+
+atoms
+  3                                    : nspecies
+  'Ba.in'                              : spfname
+  1                                    : natoms; atpos below
+  0.0  0.0  0.0
+  'Ti.in'
+  1
+  0.5  0.5  0.5
+  'O.in'
+  3
+  0.5  0.5  0.0
+  0.5  0.0  0.5
+  0.0  0.5  0.5
+

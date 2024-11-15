@@ -1,0 +1,57 @@
+
+! Fully deorbitalised meta-GGA example. See Daniel Mejia-Rodriguez and S. B. Trickey
+! Phys. Rev. B 98, 115161 (2018).
+
+! This example requires the Libxc functional library.
+
+tasks
+ 0
+ 20
+
+! XC_MGGA_X_REVSCANL, XC_MGGA_C_SCANL
+xctype
+  100 701 702
+
+! This sets several input parameters to ensure good convergence for meta-GGA
+! calculations. See the stdout of Elk for the parameters and their values.
+metagga
+ .true.
+
+ngridk
+  2  2  2
+
+mixtype
+  1
+
+plot1d
+  5  500                                : nvp1d, npp1d
+  0.5  0.0  0.0                         : vlvp1d
+  0.0  0.0  0.0
+  0.5  0.5  0.0
+  0.5  0.5  0.5
+  0.0  0.0  0.0
+
+avec
+   4.644946754       8.045283776       0.000000000
+   9.289893508       0.000000000       0.000000000
+   0.000000000       0.000000000       10.21472546
+
+sppath
+ '../../../species/'
+
+atoms
+   2                                    : nspecies
+'Si.in'                                 : spfname
+   3                                    : natoms; atposl, bfcmt below
+    0.00000000    0.46970000    0.66666667    0.00000000  0.00000000  0.00000000
+    0.46970000    0.53030000    0.33333333    0.00000000  0.00000000  0.00000000
+    0.53030000    0.00000000    0.00000000    0.00000000  0.00000000  0.00000000
+'O.in'                                  : spfname
+   6                                    : natoms; atposl, bfcmt below
+    0.26690000    0.14660000    0.78577000    0.00000000  0.00000000  0.00000000
+    0.14660000    0.58650000    0.45243667    0.00000000  0.00000000  0.00000000
+    0.58650000    0.26690000    0.11910333    0.00000000  0.00000000  0.00000000
+    0.41350000    0.85340000    0.21423000    0.00000000  0.00000000  0.00000000
+    0.73310000    0.41350000    0.54756333    0.00000000  0.00000000  0.00000000
+    0.85340000    0.73310000    0.88089667    0.00000000  0.00000000  0.00000000
+

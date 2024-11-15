@@ -1,0 +1,89 @@
+
+! Demonstration of gap closing in WeS2 bilayers by application of a strong
+! electric field. See Dai, et al., J. App. Phys. 117, 084310 (2015).
+
+tasks
+ 0
+ 31  ! plot the density in 1D
+ 41  ! plot the potentials in 1D
+
+! Electric field across the bilayer. The corresponding potential crosses zero
+! at the center of the unit cell. This field is sufficient to completely close
+! the indirect gap.
+efieldc
+ 0.0 0.0 0.04
+
+! distance from center of unit cell at which the electric field is cut off.
+dmaxefc
+ 15.0
+
+plot1d
+ 2 1000
+ 0.0 0.0 0.0
+ 0.0 0.0 1.0
+
+! band structure plot
+!tasks
+! 20
+
+!plot1d
+! 4  400                  : nvp1d, npp1d  ##number of high symmetric points
+! 0.0000000000    0.0000000000    0.0000000000  
+! 0.5000000000    0.0000000000    0.0000000000
+! 0.3333333333    0.3333333333    0.0000000000
+! 0.0000000000    0.0000000000    0.0000000000
+
+gmaxvr
+ 24.0
+
+rgkmax
+ 8.0
+
+! avoid writing direct access files to disk
+wrtdsk
+ .false.
+
+! enable spin-orbit coupling
+spinorb
+ .true.
+
+nempty
+ 10
+
+! use PBE
+xctype
+ 20
+
+ngridk
+ 8  8  1
+
+swidth
+ 0.005
+
+avec
+  0.5  -0.866025403784   0.0
+  0.5   0.866025403784   0.0
+  0.0   0.0              3.0
+
+scale
+ 6.20208114106
+
+scale3
+ 3.94881170018
+
+sppath
+  '../../../species/'
+
+atoms
+  2
+  'W.in'
+  2
+ -0.333333333333   0.333333333333 0.417
+  0.333333333333  -0.333333333333 0.583
+ 'Se.in'
+  4
+  0.333333333333  -0.333333333333 0.3740
+  0.333333333333  -0.333333333333 0.4600
+ -0.333333333333   0.333333333333 0.5400
+ -0.333333333333   0.333333333333 0.6260
+

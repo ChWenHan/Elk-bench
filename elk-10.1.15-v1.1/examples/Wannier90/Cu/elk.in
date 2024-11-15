@@ -1,0 +1,56 @@
+
+! Wannier90 example for fcc Cu. Thanks to Jerry Li.
+
+tasks
+  0
+  20
+  550
+
+highq
+ .true.
+
+nempty
+  20
+
+ngridk
+  8  8  8
+
+! These are the vertices to be joined for the band structure plot
+plot1d
+  5 200   : nvp1d, npp1d
+  0.375   0.375   0.750  : K
+  0.000   0.000   0.000  : Gamma
+  0.500   0.500   0.500  : L
+  0.500   0.250   0.750  : W
+  0.500   0.000   0.500  : X
+ 
+! extra lines to be included in the .win file
+xlwin
+bands_plot = true
+kpath = true
+kpath_task = bands
+kpath_num_points = 500
+begin kpoint_path
+   K  0.375  0.375  0.75        G  0.00   0.00   0.00
+   G  0.00   0.00   0.00        L  0.50   0.50   0.50
+   L  0.50   0.50   0.50        W  0.50   0.25   0.75
+   W  0.50   0.25   0.75        X  0.50   0.00   0.50
+end kpoint_path
+
+sppath
+ '../../../species/'
+
+avec
+  0.5  0.5  0.0
+  0.5  0.0  0.5
+  0.0  0.5  0.5
+
+scale
+   6.7603641080
+
+atoms
+  1                                   : nspecies
+  'Cu.in'                             : spfname
+  1                                   : natoms
+  0.0  0.0  0.0    0.0  0.0  0.0      : atposl, bfcmt
+

@@ -1,0 +1,87 @@
+
+! Phonon dispersion of GaAs calculated with density functional perturbation
+! theory (DFPT). Note the large number of radial mesh points required for
+! convergence. This is because the gradients calculated in the muffin-tin
+! have to be particularly accurate.
+
+! The non-analytic term in the phonon dispersion which results in the LO-TO
+! splitting is also included. This requires the additional calculation of the
+! Born effective charges and the dielectric tensor.
+
+! Note that the dynamical matrices can also be generated with the supercell
+! method. To do this, simply replace task 205 with 200.
+
+tasks
+  0          : ground state calculation
+  120        : momentum matrix elements
+  121        : dielectric function tensor
+
+! large number of k-points required for converging the dielectric function
+ngridk
+  16 16 16
+
+! larger smearing swidth also improves convergence
+swidth
+  0.005
+
+
+! uncomment the lines below to complete the calculation
+
+!ngridk
+!  4 4 4
+
+!swidth
+!  0.001
+
+!tasks
+!  1
+!  208        : Born effective charges
+!  205        : phonon calculation with DFPT
+!  220        : phonon dispersion plot
+
+! include the phonon non-analytic term
+tphnat
+ .true.
+
+! calculate all 3 × 3 components of the dielectric tensor
+noptcomp
+  9
+
+! scale up the number of radial mesh points
+nrmtscf
+  7.0
+
+! increase the angular momentum cut-off on the inner part of the muffin-tin
+lmaxi
+  2
+
+ngridq
+  4 4 4
+
+plot1d
+  7 500
+  0.0   0.0   1.0
+  0.5   0.5   1.0
+  0.0   0.0   0.0
+  0.5   0.0   0.0
+  0.5   0.5   0.0
+  0.5   0.25 -0.25
+  0.5   0.0   0.0
+
+avec
+  5.3435  5.3435  0.0000
+  5.3435  0.0000  5.3435
+  0.0000  5.3435  5.3435
+
+sppath
+ '../../../species/'
+
+atoms
+  2                                   : nspecies
+  'Ga.in'                             : spfname
+  1                                   : natoms; atposl below
+  0.0  0.0  0.0
+  'As.in'
+  1
+  0.25  0.25  0.25
+
