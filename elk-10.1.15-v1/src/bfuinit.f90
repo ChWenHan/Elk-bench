@@ -38,10 +38,10 @@ end if
 ! Prefactor
 cb=gfacte/(4.d0*solsc)
 ! Fourier transform R-dependent magnetic filed to Q-mesh and multiplied by the prefactor
-rfft(1:nqpt)=cb*bfcr(ndmag,1:nqpt)/omega
+rfft(1:nqpt)=cb*bfcr(3,1:nqpt)/omega
 call rzfftifc(3,ngridq,-1,rfft,bfcq(ndmag,1:nfqrz))
 do ias=1,natmtot
-  rfft(1:nqpt)=cb*bfcmtr(ias,ndmag,1:nqpt)/omega
+  rfft(1:nqpt)=cb*bfcmtr(ias,3,1:nqpt)/omega
   call rzfftifc(3,ngridq,-1,rfft(1:nqpt),bfcmtq(ias,ndmag,1:nfqrz))
 end do
 if (ncmag) then
