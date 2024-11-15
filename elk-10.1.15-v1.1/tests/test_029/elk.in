@@ -1,0 +1,61 @@
+
+! Ultra long-range non-collinear calculation of bcc-Cr.
+
+tasks
+  0
+  700
+  500
+
+test
+ .true.
+
+maxscl
+  3
+
+mixtype
+  1
+
+ngridk
+  1  8  8
+
+nempty
+  8
+
+rndbfcu
+  1.0
+
+spinorb
+ .true.
+
+cmagz
+ .true.
+
+avec
+  1.0 0.0 0.0
+  0.0 1.0 0.0
+  0.0 0.0 1.0
+
+scale
+  5.4897
+
+avecu
+  21.0 0.0  0.0
+  0.0  1.0  0.0
+  0.0  0.0  1.0
+
+scaleu
+  5.4897
+
+ngridq
+  3 1 1
+
+sppath
+ '../../species/'
+
+atoms
+  1
+  'Cr.in'
+  2
+  0.0  0.0  0.0       0.0   0.0   0.0
+  0.5  0.5  0.5       0.0   0.0   0.0
+

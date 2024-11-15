@@ -1,0 +1,90 @@
+
+! Renormalisation of the band gap of diamond using coupled electron and phonon
+! Bogoliubov equations. See C.-Yu Wang, et al., Phys. Rev. B 105, 174509 (2022).
+
+! This is a very expensive calculation and requires hundreds of cores to run in
+! a reasonable time.
+
+! First generate the phonon dynamical matrices
+tasks
+  0         : ground-state
+  205       : compute the dynamical matrices
+  220       : output phonon dispersion
+
+! Then uncomment the following lines to solve the Bogoliubov equations
+!tasks
+!  1        : ground-state
+!  10       : DOS
+!  241      : generate electron-phonon coupling matrix elements
+!  270      : solve the electron-phonon Bogoliubov equations self-consistently
+!  280      : compute the renormalised DOS
+!  285      : compute the FACE and BACE (see article)
+
+pwxpsn
+  2
+
+wplot
+  10000 300 8
+ -0.8  0.8
+
+tauefm
+  0.1
+
+tephde
+ .false.
+
+ephscf
+  8.0 0.02
+
+rgkmax
+  8.0
+
+lmaxi
+  2
+
+nrmtscf
+  2.0
+
+nempty
+  16
+
+broydpm
+  0.04 0.01
+
+mixsdb
+  8
+
+maxscl
+  500
+
+ngridq
+  4  4  4
+
+ngridk
+  16 16 16
+
+avec
+  3.3637  3.3637  0.0000
+  3.3637  0.0000  3.3637
+  0.0000  3.3637  3.3637
+
+sppath
+  '../../../species/'
+
+atoms
+  1                                 : nspecies
+  'C.in'                            : spfname
+  2                                 : natoms; atposl below
+  0.0  0.0  0.0
+  0.25 0.25 0.25
+
+plot1d
+  7 200                                 : nvp1d, npp1d
+  1.0   0.0   0.0
+  0.5   0.5   0.0
+  0.0   0.0   0.0
+  0.5   0.0   0.0
+  0.5   0.5   0.0
+  0.5   0.25 -0.25
+  0.5   0.0   0.0
+

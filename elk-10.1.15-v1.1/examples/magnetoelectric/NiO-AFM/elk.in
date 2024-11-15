@@ -1,0 +1,69 @@
+
+! Calculation of the magnetoelectric (ME) tensor for NiO in the AFMII structure.
+
+! Note that the linear ME tensor is non-zero only for systems with broken
+! time-reversal symmetry. NiO is an anti-ferromagnetic insulator and thus has a
+! finite ME tensor.
+
+tasks
+  390
+
+wrtdsk
+ .false.
+
+highq
+ .true.
+
+ngridk
+  8  8  8
+
+nempty
+  8
+
+! limit the number of self-consistent loops
+maxscl
+  50
+
+! small change in magnetic field used for calculating the magnetoelectric tensor
+deltabf
+  0.5
+
+! scaling factor of k-points when calculating the polarisation
+nkspolar
+  4
+
+spinpol
+ .true.
+
+spinorb
+ .true.
+
+! DFT+U block
+! the screening length corresponding to U=0.29399 Ha (8 eV) will be determined
+! with a secant algorithm and therefore J does not need to be specified
+dft+u
+  1 5            : dftu, inpdftu
+  1 2  0.29399   : is, l, U fixed
+
+scale
+  7.893389
+
+avec
+  1.0  0.5  0.5
+  0.5  1.0  0.5
+  0.5  0.5  1.0
+
+sppath
+  '../../../species/'
+
+atoms
+  2                                    : nspecies
+  'Ni.in'                              : spfname
+  2                                    : natoms; atpos, bfcmt below
+  0.0   0.0   0.0    0.0  0.0 -0.01
+  0.5   0.5   0.5    0.0  0.0  0.01
+  'O.in'                               : spfname
+  2                                    : natoms; atpos, bfcmt below
+  0.25  0.25  0.25   0.0  0.0  0.0
+  0.75  0.75  0.75   0.0  0.0  0.0
+

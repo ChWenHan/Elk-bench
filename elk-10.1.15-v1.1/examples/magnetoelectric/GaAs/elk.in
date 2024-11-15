@@ -1,0 +1,58 @@
+
+! Magnetoelectric (ME) tensor of GaAs.
+
+! Note that the linear ME tensor is zero for time-reversal symmetric sytems.
+! Therefore we have to apply an external magnetic field to break this symmetry.
+
+! The second-order ME tensor can be determined by calculating the linear tensor
+! for at least two different external magnetic fields.
+
+tasks
+  390
+
+! high-quality calculation
+highq
+ .true.
+
+spinpol
+ .true.
+
+spinorb
+ .true.
+
+! large external magnetic field
+bfieldc
+  0.0  0.0  0.1
+
+! small change in magnetic field used for calculating the magnetoelectric tensor
+deltabf
+  0.05
+
+! k-point grid
+ngridk
+  8  8  8
+
+! scaling factor of k-points when calculating the polarisation
+nkspolar
+  4
+
+avec
+  0.5  0.5  0.0
+  0.5  0.0  0.5
+  0.0  0.5  0.5
+
+scale
+  10.6826
+
+sppath
+  '../../../species/'
+
+atoms
+  2                                 : nspecies
+  'Ga.in'                           : spfname
+  1                                 : natoms; atposl below
+  0.0   0.0   0.0
+  'As.in'
+  1
+  0.25  0.25  0.25
+
